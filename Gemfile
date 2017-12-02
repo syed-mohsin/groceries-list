@@ -48,6 +48,9 @@ end
 group :production do
   # To enable features such as static asset serving and logging on Heroku
   gem 'rails_12factor'
+
+  # Default heroku server
+  gem 'puma'
 end
 
 # specify ruby version
