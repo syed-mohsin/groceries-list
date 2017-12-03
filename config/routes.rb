@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :lists, except: [:new, :edit]
+      resources :items, except: [:index, :new, :edit]
     end
   end
 

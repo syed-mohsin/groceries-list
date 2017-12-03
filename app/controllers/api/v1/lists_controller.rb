@@ -29,7 +29,7 @@ class Api::V1::ListsController < Api::V1::BaseController
 
   def destroy
     @list.destroy
-    respond_with @list
+    render json: @list
   end
 
   private
