@@ -6,6 +6,6 @@ class Api::V1::BaseController < ApplicationController
   respond_to :json
 
   rescue_from Exception do |exception|
-    render json: { errors: exception.to_s }.to_json, status => :bad_request
+    render json: { errors: exception.to_s }.to_json, status: :bad_request
   end
 end
