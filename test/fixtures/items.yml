@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyText
+  is_in_main_list: false
+  is_completed: false
+  price: 9.99
+
+two:
+  content: MyText
+  is_in_main_list: false
+  is_completed: false
+  price: 9.99
