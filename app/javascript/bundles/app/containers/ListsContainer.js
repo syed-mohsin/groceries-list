@@ -1,12 +1,16 @@
 // Simple example of a React "smart" component
 
 import { connect } from 'react-redux';
-import List from '../components/List';
+import IndexList from '../components/IndexList';
 import * as actions from '../actions/ListActionCreators';
 
 const mapStateToProps = (state) => {
   console.log('state', state);
-  return ({ lists: state.lists });
+  return state.lists;
 };
 
-export default connect(mapStateToProps, actions)(List);
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(IndexList);

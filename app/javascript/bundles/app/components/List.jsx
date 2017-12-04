@@ -1,32 +1,25 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default class List extends React.Component {
-  static propTypes = {
-    lists: PropTypes.array.isRequired, // this is passed from the Rails view
-  };
+import {
+  ListItem,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText,
+} from 'material-ui/List';
 
-  /**
-   * @param props - Comes from your rails view.
-   */
-  constructor(props) {
-    super(props);
+import IconButton from 'material-ui/IconButton';
+import ModeEditIcon from 'material-ui-icons/ModeEdit';
+import DeleteIcon from 'material-ui-icons/Delete';
 
-    const { lists } = this.props;
-    this.state = { lists };
-  }
+import { withStyles } from 'material-ui/styles';
 
-  updateName = (name) => {
-    this.setState({ name });
-  };
+const List = ({ list }) => (
+  <ListItem>
+    <ListItemText primary={list.name} secondary={`${list.items.length} items`}/>
+    <IconButton color="accent" aria-label="edit" onClick={(e) => true}><ModeEditIcon /></IconButton>
+    <IconButton aria-label="Delete" onClick={(e) => true}><DeleteIcon /></IconButton>
+  </ListItem>
+);
 
-  render() {
-    const { lists } = this.state;
-
-    return (
-      <ul>
-        { lists.map(list => <li key={list.id}>{list.name}</li>)}
-      </ul>
-    );
-  }
-}
+export default List;
