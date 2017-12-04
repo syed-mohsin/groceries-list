@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'responders'
 
 gem 'react_on_rails', '10.0.2'
-gem 'webpacker'
+gem "webpacker", "~> 3.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
