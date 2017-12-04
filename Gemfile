@@ -58,3 +58,6 @@ group :production do
   # Default heroku server
   gem 'puma'
 end
+
+# specify ruby version
+ruby "2.4.1"
