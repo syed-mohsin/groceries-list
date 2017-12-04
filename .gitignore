@@ -14,3 +14,6 @@
 
 # Ignore dev/test environment variables
 env.sh
+/public/packs
+/public/packs-test
+/node_modules

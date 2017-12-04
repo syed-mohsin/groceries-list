@@ -26,6 +26,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # for adding useful methods like respond_with
 gem 'responders'
 
+gem 'react_on_rails', '10.0.2'
+gem 'webpacker'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
