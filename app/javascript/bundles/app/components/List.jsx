@@ -74,7 +74,7 @@ class List extends React.Component {
 
         :
 
-        <ListItem dense>
+        <ListItem>
           <ListItemText primary={list.name} secondary={`${list.items.length} items`}/>
           <IconButton color="accent" aria-label="edit" onClick={(e) => editClickHandler(list.id)}><ModeEditIcon /></IconButton>
           <IconButton aria-label="Delete" onClick={this.handleDelete}><DeleteIcon /></IconButton>
