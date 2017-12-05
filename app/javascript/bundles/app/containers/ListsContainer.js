@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-
+  selectListToEdit: dispatch(actions.selectListToEdit),
+  clearSelectedListToEdit: dispatch(actions.clearSelectedListToEdit),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(IndexList);
+export default connect(mapStateToProps, actions)(IndexList);

@@ -21,7 +21,7 @@ const App = (props) => (
     <BrowserRouter>
       <div className="main-app">
         <NavBar />
-        <div className={classNames({ [props.classes.root]: true, 'w-100': true })}>
+        <div className={classNames({ [props.classes.root]: true, 'm-2': true })}>
           <Switch>
             <Route exact path="/" component={ListContainer} />
           </Switch>

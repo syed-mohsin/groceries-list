@@ -24,13 +24,16 @@ const styles = theme => ({
     marginLeft: -12,
     marginRight: 20,
   },
+  color: {
+    backgroundColor: '#03A9F4',
+  }
 });
 
 function NavBar(props) {
   const { classes, history } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" className={classes.color}>
         <Toolbar>
           <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
             <MenuIcon />

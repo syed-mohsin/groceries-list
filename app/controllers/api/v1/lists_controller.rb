@@ -1,5 +1,5 @@
 class Api::V1::ListsController < Api::V1::BaseController
-  before_action :set_list, only: [:show, :update]
+  before_action :set_list, only: [:show, :update, :destroy]
 
   def index
     lists = List.all
