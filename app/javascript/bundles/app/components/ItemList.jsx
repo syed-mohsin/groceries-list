@@ -9,13 +9,14 @@ import DeleteIcon from 'material-ui-icons/Delete';
 
 import { withStyles } from 'material-ui/styles';
 
-import List from './Item';
+import Item from './Item';
 // import NewItemInput from '../containers/NewItemInput';
 
 const ItemList = (props) => {
     const {
       classes,
       list,
+      items,
       editItemId,
       selectItemToEdit,
       clearSelectedItemToEdit,
@@ -23,13 +24,11 @@ const ItemList = (props) => {
       handleDelete,
     } = props;
 
-    const items = list.items ? items : [];
-
     return <div>
       <MuiList subheader={<ListSubheader>{list.name}</ListSubheader>}>
-        { items.map(list => (
+        { items.map(item => (
           <Item
-            key={list.id} item={item}
+            key={item.id} item={item}
             editClickHandler={selectItemToEdit}
             editId={editItemId}
             deselectInput={clearSelectedItemToEdit}

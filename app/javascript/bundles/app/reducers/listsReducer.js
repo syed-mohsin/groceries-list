@@ -62,7 +62,7 @@ const listsReducer = (state = {}, action) => {
     case DELETE_ASYNC_SUCCESS:
       const { deletedList } = action;
       lists = state.lists.filter(list => list.id !== deletedList.id);
-      return Object.assign({}, { lists });
+      return Object.assign({}, state, { lists });
 
     case DELETED_ASYNC_FAILURE:
       message = 'There was an error trying to edit item';

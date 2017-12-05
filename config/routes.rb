@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'welcome#index'
+  get '/lists/:id', to: 'welcome#show'
 
   # this API responds by default with JSON
   namespace :api, defaults: { format: :json } do

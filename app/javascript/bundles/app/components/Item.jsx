@@ -23,8 +23,9 @@ class Item extends React.Component {
     if (e.key === 'Enter') {
       const id = this.props.item.id;
       const content = this.state.content;
+      const price = this.state.price;
 
-      this.props.handleEditSubmit(id, content)
+      this.props.handleEditSubmit(id, { content, price })
       .then(() => this.props.deselectInput())
     }
   }
@@ -35,7 +36,7 @@ class Item extends React.Component {
   }
 
   handleInputChange = (e) => {
-    this.setState({ content: e.target.content });
+    this.setState({ content: e.target.value });
   }
 
   handleKeyDown = (e) => {
@@ -58,14 +59,15 @@ class Item extends React.Component {
   }
 
   render() {
+    console.log('props', this.props);
     const { item, editId, editClickHandler, deselectInput } = this.props;
 
     return <div>
-      { editId === list.id ?
+      { editId === item.id ?
         <ListItem>
           <TextField
             margin="normal"
-            value={this.state.name}
+            value={this.state.content}
             onChange={this.handleInputChange}
             onKeyPress={this.handleEditSubmit}
             onKeyDown={this.handleKeyDown}
@@ -78,7 +80,7 @@ class Item extends React.Component {
         :
 
         <ListItem>
-          <ListItemText primary={list.name} secondary={`$${items.price.toFixed(2)}`}/>
+          <ListItemText primary={item.content} secondary={`$${parseFloat(item.price).toFixed(2)}`}/>
           <IconButton color="accent" aria-label="edit" onClick={(e) => editClickHandler(item.id)}><ModeEditIcon /></IconButton>
           <IconButton aria-label="Delete" onClick={this.handleDelete}><DeleteIcon /></IconButton>
         </ListItem>

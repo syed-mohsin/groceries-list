@@ -5,8 +5,21 @@ class WelcomeController < ApplicationController
       lists: {
         lists: lists.as_json(include: :items),
         editListId: nil,
-        editMessage: '',
-        deleteMessage: '',
+        message: ''
+      }
+    }
+  end
+
+  def show
+    list = List.find(params[:id])
+    items = list.items
+
+    @props = {
+      items: {
+        list: list,
+        items: items,
+        editItemId: nil,
+        message: ''
       }
     }
   end
