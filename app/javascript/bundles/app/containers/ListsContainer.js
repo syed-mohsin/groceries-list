@@ -5,7 +5,6 @@ import IndexList from '../components/IndexList';
 import * as actions from '../actions/ListActionCreators';
 
 const mapStateToProps = (state) => {
-  console.log('state', state);
   return state.lists;
 };
 

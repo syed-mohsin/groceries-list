@@ -21,7 +21,8 @@ class List extends React.Component {
       const id = this.props.list.id;
       const name = this.state.name;
 
-      this.props.handleEditSubmit(id, name);
+      this.props.handleEditSubmit(id, name)
+      .then(() => this.props.deselectInput())
     }
   }
 
@@ -58,7 +59,7 @@ class List extends React.Component {
 
     return <div>
       { editId === list.id ?
-        <ListItem dense>
+        <ListItem>
           <TextField
             margin="normal"
             value={this.state.name}

@@ -14,8 +14,8 @@ class Input extends React.Component {
 
   inputSubmitHandler = (e) => {
     if (e.key === 'Enter') {
-      this.props.handleSubmit(e.target.value);
-      this.setState({ value: '' });
+      this.props.handleSubmit(e.target.value)
+      .then(() => this.setState({ value: '' }));
     }
   }
 

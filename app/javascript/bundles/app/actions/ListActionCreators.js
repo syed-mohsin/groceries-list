@@ -26,7 +26,7 @@ export const clearSelectedListToEdit = () => ({
 export const handleNewSubmit = (name) => (dispatch) => {
   dispatch({ type: NEW_ASYNC_REQUEST });
 
-  fetch('/api/v1/lists/', {
+  return fetch('/api/v1/lists/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export const handleNewSubmit = (name) => (dispatch) => {
 export const handleEditSubmit = (id, name) => (dispatch) => {
   dispatch({ type: EDIT_ASYNC_REQUEST });
 
-  fetch(`/api/v1/lists/${id}`, {
+  return fetch(`/api/v1/lists/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export const handleEditSubmit = (id, name) => (dispatch) => {
 export const handleDelete = (id) => (dispatch) => {
   dispatch({ type: DELETE_ASYNC_REQUEST });
 
-  fetch(`/api/v1/lists/${id}`, {
+  return fetch(`/api/v1/lists/${id}`, {
     method: 'DELETE',
   })
   .then(res => {
