@@ -13,7 +13,13 @@ import { withStyles } from 'material-ui/styles';
 class Item extends React.Component {
   constructor(props) {
     super(props);
-    this.state = props.setInitialState(props.item);
+    const { item } = props;
+    this.state = props.setInitialState(item);
+  }
+
+  clickHandler = () => {
+    const { item, history } = this.props;
+    this.props.handleClick(item, history);
   }
 
   handleEditSubmit = (e) => {
@@ -79,8 +85,8 @@ class Item extends React.Component {
 
         :
 
-        <ListItem>
-          <ListItemText primary={primaryLabel(item)} secondary={secondaryLabel(item)}/>
+        <ListItem button>
+          <ListItemText primary={primaryLabel(item)} secondary={secondaryLabel(item)} onClick={this.clickHandler} />
           <IconButton color="accent" aria-label="edit" onClick={(e) => editClickHandler(item.id)}><ModeEditIcon /></IconButton>
           <IconButton aria-label="Delete" onClick={this.handleDelete}><DeleteIcon /></IconButton>
         </ListItem>

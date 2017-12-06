@@ -1,91 +1,90 @@
-import {
-  START_ITEM_EDIT,
-  CLEAR_ITEM_EDIT,
-  CLEAR_ITEMS,
-  LOAD_ITEMS_ASYNC_REQUEST,
-  LOAD_ITEMS_ASYNC_SUCCESS,
-  LOAD_ITEMS_ASYNC_FAILURE,
-  NEW_ITEM_ASYNC_REQUEST,
-  NEW_ITEM_ASYNC_SUCCESS,
-  NEW_ITEM_ASYNC_FAILURE,
-  EDIT_ITEM_ASYNC_REQUEST,
-  EDIT_ITEM_ASYNC_SUCCESS,
-  EDIT_ITEM_ASYNC_FAILURE,
-  DELETE_ITEM_ASYNC_REQUEST,
-  DELETE_ITEM_ASYNC_SUCCESS,
-  DELETED_ITEM_ASYNC_FAILURE,
-} from '../constants/listConstants';
+import * as types from '../constants/listActionConstants';
 
 const initialState = {
+  listData: {},
   items: [],
   editItemId: null,
   message: '',
 }
 
 const itemsReducer = (state = initialState, action) => {
-  let items, message;
-
   switch (action.type) {
-    case START_ITEM_EDIT:
+    case types.START_ITEM_EDIT: {
       const { editItemId } = action;
       return Object.assign({}, state, { editItemId });
+    }
 
-    case CLEAR_ITEM_EDIT:
+    case types.CLEAR_ITEM_EDIT: {
       return Object.assign({}, state, { editItemId: null });
+    }
 
-    case CLEAR_ITEMS:
+    case types.CLEAR_ITEMS: {
+      console.log('clearing items in reducer');
       return initialState;
+    }
 
-    case LOAD_ITEMS_ASYNC_REQUEST:
-      message = 'New request sent';
+    case types.LOAD_ITEMS_ASYNC_REQUEST: {
+      const message = 'New request sent';
       return Object.assign({}, state, { message });
+    }
 
-    case LOAD_ITEMS_ASYNC_SUCCESS:
-      items = action.items;
-      return Object.assign({}, state, { items });
+    case types.LOAD_ITEMS_ASYNC_SUCCESS: {
+      const { items, listData } = action;
+      return Object.assign({}, state, { items, listData });
+    }
 
-    case LOAD_ITEMS_ASYNC_FAILURE:
-      message = 'There was an error trying to load items';
+    case types.LOAD_ITEMS_ASYNC_FAILURE: {
+      const message = 'There was an error trying to load items';
       return Object.assign({}, state, { message });
+    }
 
-    case NEW_ITEM_ASYNC_REQUEST:
-      message = 'New request sent';
+    case types.NEW_ITEM_ASYNC_REQUEST: {
+      const message = 'New request sent';
       return Object.assign({}, state, { message });
+    }
 
-    case NEW_ITEM_ASYNC_SUCCESS:
+    case types.NEW_ITEM_ASYNC_SUCCESS: {
       const { newItem } = action;
-      items = [...state.items, newItem];
+      const items = [...state.items, newItem];
       return Object.assign({}, state, { items });
+    }
 
-    case NEW_ITEM_ASYNC_FAILURE:
-      message = 'There was an error trying to create new item';
+    case types.NEW_ITEM_ASYNC_FAILURE: {
+      const message = 'There was an error trying to create new item';
       return Object.assign({}, state, { message });
+    }
 
-    case EDIT_ITEM_ASYNC_REQUEST:
-      message = 'Edit request sent';
+    case types.EDIT_ITEM_ASYNC_REQUEST: {
+      const message = 'Edit request sent';
       return Object.assign({}, state, { message });
+    }
 
-    case EDIT_ITEM_ASYNC_SUCCESS:
+    case types.EDIT_ITEM_ASYNC_SUCCESS: {
       const { editedItem } = action;
-      items = state.items.map(item => item.id === editedItem.id ? editedItem : item);
+      const items = state.items.map(item => item.id === editedItem.id ? editedItem : item);
       return Object.assign({}, state, { items });
+    }
 
-    case EDIT_ITEM_ASYNC_FAILURE:
-      message = 'There was an error trying to edit item';
+    case types.EDIT_ITEM_ASYNC_FAILURE: {
+      const message = 'There was an error trying to edit item';
       return Object.assign({}, state, { message });
+    }
 
-    case DELETE_ITEM_ASYNC_REQUEST:
-      message = 'Delete request sent';
+    case types.DELETE_ITEM_ASYNC_REQUEST: {
+      const message = 'Delete request sent';
       return Object.assign({}, state, { message });
+    }
 
-    case DELETE_ITEM_ASYNC_SUCCESS:
+    case types.DELETE_ITEM_ASYNC_SUCCESS: {
       const { deletedItem } = action;
-      items = state.items.filter(item => item.id !== deletedItem.id);
+      const items = state.items.filter(item => item.id !== deletedItem.id);
       return Object.assign({}, state, { items });
+    }
 
-    case DELETED_ITEM_ASYNC_FAILURE:
-      message = 'There was an error trying to delete item';
+    case types.DELETED_ITEM_ASYNC_FAILURE: {
+      const message = 'There was an error trying to delete item';
       return Object.assign({}, state, { message });
+    }
 
     default:
       return state;

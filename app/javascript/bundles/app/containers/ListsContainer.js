@@ -14,8 +14,9 @@ const mapStateToProps = (state) => ({
   setInitialState: list => ({ name: list.name }),
   buildBody: body => ({ list: body }),
   primaryLabel: list => list.name,
-  secondaryLabel: list => `${list.items.length} items`,
+  secondaryLabel: list => `${list.items ? list.items.length : 0} items`,
   setInputState: name => ({ name }),
+  handleClick: (item, history) => history.push(`/lists/${item.id}`),
 });
 
 export default connect(mapStateToProps, actions)(List);

@@ -1,38 +1,22 @@
 /* eslint-disable import/prefer-default-export */
 
-import {
-  START_ITEM_EDIT,
-  CLEAR_ITEM_EDIT,
-  CLEAR_ITEMS,
-  LOAD_ITEMS_ASYNC_REQUEST,
-  LOAD_ITEMS_ASYNC_SUCCESS,
-  LOAD_ITEMS_ASYNC_FAILURE,
-  NEW_ITEM_ASYNC_REQUEST,
-  NEW_ITEM_ASYNC_SUCCESS,
-  NEW_ITEM_ASYNC_FAILURE,
-  EDIT_ITEM_ASYNC_REQUEST,
-  EDIT_ITEM_ASYNC_SUCCESS,
-  EDIT_ITEM_ASYNC_FAILURE,
-  DELETE_ITEM_ASYNC_REQUEST,
-  DELETE_ITEM_ASYNC_SUCCESS,
-  DELETED_ITEM_ASYNC_FAILURE,
-} from '../constants/listConstants';
+import * as types from '../constants/listActionConstants';
 
 export const selectItemToEdit = (editItemId) => ({
-  type: START_ITEM_EDIT,
+  type: types.START_ITEM_EDIT,
   editItemId,
 });
 
 export const clearSelectedItemToEdit = () => ({
-  type: CLEAR_ITEM_EDIT,
+  type: types.CLEAR_ITEM_EDIT,
 });
 
 export const clearItems = () => ({
-  type: CLEAR_ITEMS,
+  type: types.CLEAR_ITEMS,
 })
 
 export const loadItems = (url, id) => (dispatch) => {
-  dispatch({ type: LOAD_ITEMS_ASYNC_REQUEST });
+  dispatch({ type: types.LOAD_ITEMS_ASYNC_REQUEST });
 
   return fetch(`${url}${id ? id : ''}`, {
     method: 'GET',
@@ -41,16 +25,25 @@ export const loadItems = (url, id) => (dispatch) => {
     if (!res.ok) throw new Error(res.statusText);
     return res.json();
   })
-  .then(items => {
-    dispatch({ type: LOAD_ITEMS_ASYNC_SUCCESS, items })
+  .then(data => {
+    let listData = {}, items = [];
+
+    if (Array.isArray(data)) {
+      items = data;
+    } else {
+      listData = data;
+      items = listData.items;
+    }
+
+    dispatch({ type: types.LOAD_ITEMS_ASYNC_SUCCESS, items, listData })
   })
   .catch(() => {
-    dispatch({ type: LOAD_ITEMS_ASYNC_FAILURE });
+    dispatch({ type: types.LOAD_ITEMS_ASYNC_FAILURE });
   });
 }
 
 export const handleNewSubmit = (url, body) => (dispatch) => {
-  dispatch({ type: NEW_ITEM_ASYNC_REQUEST });
+  dispatch({ type: types.NEW_ITEM_ASYNC_REQUEST });
 
   return fetch(url, {
     method: 'POST',
@@ -64,15 +57,15 @@ export const handleNewSubmit = (url, body) => (dispatch) => {
     return res.json();
   })
   .then(newItem => {
-    dispatch({ type: NEW_ITEM_ASYNC_SUCCESS, newItem })
+    dispatch({ type: types.NEW_ITEM_ASYNC_SUCCESS, newItem })
   })
   .catch(() => {
-    dispatch({ type: NEW_ITEM_ASYNC_FAILURE });
+    dispatch({ type: types.NEW_ITEM_ASYNC_FAILURE });
   });
 };
 
 export const handleEditSubmit = (url, id, body) => (dispatch) => {
-  dispatch({ type: EDIT_ITEM_ASYNC_REQUEST });
+  dispatch({ type: types.EDIT_ITEM_ASYNC_REQUEST });
 
   return fetch(`${url}${id}`, {
     method: 'PUT',
@@ -86,15 +79,15 @@ export const handleEditSubmit = (url, id, body) => (dispatch) => {
     return res.json();
   })
   .then(editedItem => {
-    dispatch({ type: EDIT_ITEM_ASYNC_SUCCESS, editedItem })
+    dispatch({ type: types.EDIT_ITEM_ASYNC_SUCCESS, editedItem })
   })
   .catch(() => {
-    dispatch({ type: EDIT_ITEM_ASYNC_FAILURE });
+    dispatch({ type: types.EDIT_ITEM_ASYNC_FAILURE });
   });
 };
 
 export const handleDelete = (url, id) => (dispatch) => {
-  dispatch({ type: DELETE_ITEM_ASYNC_REQUEST });
+  dispatch({ type: types.DELETE_ITEM_ASYNC_REQUEST });
 
   return fetch(`${url}${id}`, {
     method: 'DELETE',
@@ -104,9 +97,9 @@ export const handleDelete = (url, id) => (dispatch) => {
     return res.json();
   })
   .then(deletedItem => {
-    dispatch({ type: DELETE_ITEM_ASYNC_SUCCESS, deletedItem })
+    dispatch({ type: types.DELETE_ITEM_ASYNC_SUCCESS, deletedItem })
   })
   .catch(() => {
-    dispatch({ type: DELETED_ITEM_ASYNC_FAILURE });
+    dispatch({ type: types.DELETED_ITEM_ASYNC_FAILURE });
   });
 }

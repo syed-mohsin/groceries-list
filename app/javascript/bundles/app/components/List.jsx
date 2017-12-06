@@ -2,16 +2,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import MuiList, { ListSubheader } from 'material-ui/List';
-
-import IconButton from 'material-ui/IconButton';
-import ModeEditIcon from 'material-ui-icons/ModeEdit';
-import DeleteIcon from 'material-ui-icons/Delete';
-
 import Item from './Item';
 
 class List extends React.Component {
-  componentDidMount() {
-    if (!this.props.items.length) {
+  componentWillReceiveProps(newProps) {
+    // we load new data here because componentWillUnmount of previous component gets called
+    // AFTER componentWIllMount. This kicks off componentDidMount ignoring the now cleared
+    // state, so that cleared state needs to be detected in componentWillReceiveProps
+    if (JSON.stringify(this.props) !== JSON.stringify(newProps) && !newProps.items.length) {
       this.props.loadItems('/api/v1/lists/', this.props.match.params.id);
     }
   }
@@ -27,6 +25,7 @@ class List extends React.Component {
       clearSelectedItemToEdit,
       listSubHeader,
       NewInput,
+      ...remainingProps,
     } = this.props;
 
     return <div>
@@ -37,7 +36,7 @@ class List extends React.Component {
             item={item}
             editClickHandler={selectItemToEdit}
             deselectInput={clearSelectedItemToEdit}
-            {...this.props}
+            {...remainingProps}
           />
         ))}
       </MuiList>

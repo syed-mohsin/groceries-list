@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 export const START_ITEM_EDIT = 'START_ITEM_EDIT';
 export const CLEAR_ITEM_EDIT = 'CLEAR_ITEM_EDIT';
 export const CLEAR_ITEMS = 'CLEAR_ITEMS';
