@@ -2,10 +2,8 @@ class WelcomeController < ApplicationController
   def index
     lists = List.all
     @props = {
-      items: {
-        items: lists.as_json(include: :items),
-        editItemId: nil,
-        message: ''
+      list: {
+        items: lists.as_json(include: :items)
       }
     }
   end
@@ -15,11 +13,9 @@ class WelcomeController < ApplicationController
     items = list.items
 
     @props = {
-      items: {
+      list: {
         list: list,
         items: items,
-        editItemId: nil,
-        message: ''
       }
     }
   end

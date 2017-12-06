@@ -13,19 +13,14 @@ import { withStyles } from 'material-ui/styles';
 class Item extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      content: props.item.content,
-      price: props.item.price,
-    };
+    this.state = props.setInitialState(props.item);
   }
 
   handleEditSubmit = (e) => {
     if (e.key === 'Enter') {
       const url = this.props.url,
             id = this.props.item.id,
-            content = this.state.content,
-            price = this.state.price,
-            body = { item: { content, price } };
+            body = this.props.buildBody(this.state);
 
       this.props.handleEditSubmit(url, id, body)
       .then(() => this.props.deselectInput())
@@ -40,7 +35,7 @@ class Item extends React.Component {
   }
 
   handleInputChange = (e) => {
-    this.setState({ content: e.target.value });
+    this.setState(this.props.setInputState(e.target.value));
   }
 
   handleKeyDown = (e) => {
@@ -63,15 +58,16 @@ class Item extends React.Component {
   }
 
   render() {
-    const { item, editItemId, editClickHandler, deselectInput } = this.props;
-    console.log('props', this.props, item.id === editItemId);
+    const { item, editItemId, editClickHandler, deselectInput,
+            primaryLabel, secondaryLabel, inputValueKey } = this.props;
+    console.log('props', this.props);
 
     return <div>
       { editItemId === item.id ?
         <ListItem>
           <TextField
             margin="normal"
-            value={this.state.content}
+            value={this.state[inputValueKey]}
             onChange={this.handleInputChange}
             onKeyPress={this.handleEditSubmit}
             onKeyDown={this.handleKeyDown}
@@ -84,7 +80,7 @@ class Item extends React.Component {
         :
 
         <ListItem>
-          <ListItemText primary={item.content} secondary={`$${parseFloat(item.price).toFixed(2)}`}/>
+          <ListItemText primary={primaryLabel(item)} secondary={secondaryLabel(item)}/>
           <IconButton color="accent" aria-label="edit" onClick={(e) => editClickHandler(item.id)}><ModeEditIcon /></IconButton>
           <IconButton aria-label="Delete" onClick={this.handleDelete}><DeleteIcon /></IconButton>
         </ListItem>

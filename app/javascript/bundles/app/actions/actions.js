@@ -3,6 +3,10 @@
 import {
   START_ITEM_EDIT,
   CLEAR_ITEM_EDIT,
+  CLEAR_ITEMS,
+  LOAD_ITEMS_ASYNC_REQUEST,
+  LOAD_ITEMS_ASYNC_SUCCESS,
+  LOAD_ITEMS_ASYNC_FAILURE,
   NEW_ITEM_ASYNC_REQUEST,
   NEW_ITEM_ASYNC_SUCCESS,
   NEW_ITEM_ASYNC_FAILURE,
@@ -12,7 +16,7 @@ import {
   DELETE_ITEM_ASYNC_REQUEST,
   DELETE_ITEM_ASYNC_SUCCESS,
   DELETED_ITEM_ASYNC_FAILURE,
-} from '../constants/itemListConstants';
+} from '../constants/listConstants';
 
 export const selectItemToEdit = (editItemId) => ({
   type: START_ITEM_EDIT,
@@ -22,6 +26,28 @@ export const selectItemToEdit = (editItemId) => ({
 export const clearSelectedItemToEdit = () => ({
   type: CLEAR_ITEM_EDIT,
 });
+
+export const clearItems = () => ({
+  type: CLEAR_ITEMS,
+})
+
+export const loadItems = (url, id) => (dispatch) => {
+  dispatch({ type: LOAD_ITEMS_ASYNC_REQUEST });
+
+  return fetch(`${url}${id ? id : ''}`, {
+    method: 'GET',
+  })
+  .then(res => {
+    if (!res.ok) throw new Error(res.statusText);
+    return res.json();
+  })
+  .then(items => {
+    dispatch({ type: LOAD_ITEMS_ASYNC_SUCCESS, items })
+  })
+  .catch(() => {
+    dispatch({ type: LOAD_ITEMS_ASYNC_FAILURE });
+  });
+}
 
 export const handleNewSubmit = (url, body) => (dispatch) => {
   dispatch({ type: NEW_ITEM_ASYNC_REQUEST });
