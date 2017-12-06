@@ -21,18 +21,22 @@ class Item extends React.Component {
 
   handleEditSubmit = (e) => {
     if (e.key === 'Enter') {
-      const id = this.props.item.id;
-      const content = this.state.content;
-      const price = this.state.price;
+      const url = this.props.url,
+            id = this.props.item.id,
+            content = this.state.content,
+            price = this.state.price,
+            body = { item: { content, price } };
 
-      this.props.handleEditSubmit(id, { content, price })
+      this.props.handleEditSubmit(url, id, body)
       .then(() => this.props.deselectInput())
     }
   }
 
   handleDelete = () => {
-    const id = this.props.item.id;
-    this.props.handleDelete(id);
+    const url = this.props.url,
+          id = this.props.item.id;
+
+    this.props.handleDelete(url, id);
   }
 
   handleInputChange = (e) => {
@@ -59,11 +63,11 @@ class Item extends React.Component {
   }
 
   render() {
-    console.log('props', this.props);
-    const { item, editId, editClickHandler, deselectInput } = this.props;
+    const { item, editItemId, editClickHandler, deselectInput } = this.props;
+    console.log('props', this.props, item.id === editItemId);
 
     return <div>
-      { editId === item.id ?
+      { editItemId === item.id ?
         <ListItem>
           <TextField
             margin="normal"

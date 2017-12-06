@@ -1,10 +1,9 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import lists from '../reducers/listsReducer';
 import items from '../reducers/itemListReducer';
 
-const reducers = combineReducers({ lists, items });
+const reducers = combineReducers({ items });
 
 const configureStore = (railsProps) => {
   // remove classes prop passed into App from withStyles in (App.jsx)

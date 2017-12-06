@@ -1,16 +1,17 @@
 // Simple example of a React "smart" component
 
 import { connect } from 'react-redux';
-import IndexList from '../components/IndexList';
-import * as actions from '../actions/ListActionCreators';
+import TempList from '../components/TempList';
+import List from '../components/List';
+import NewListInput from '../containers/NewListInput';
+import * as actions from '../actions/actions';
 
-const mapStateToProps = (state) => {
-  return state.lists;
-};
-
-const mapDispatchToProps = dispatch => ({
-  selectListToEdit: dispatch(actions.selectListToEdit),
-  clearSelectedListToEdit: dispatch(actions.clearSelectedListToEdit),
+const mapStateToProps = (state) => ({
+  ...state.items,
+  listSubHeader: 'Your Lists',
+  url: '/api/v1/lists/',
+  Item: List,
+  NewInput: NewListInput,
 });
 
-export default connect(mapStateToProps, actions)(IndexList);
+export default connect(mapStateToProps, actions)(TempList);

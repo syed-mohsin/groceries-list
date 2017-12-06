@@ -9,36 +9,39 @@ import DeleteIcon from 'material-ui-icons/Delete';
 
 import { withStyles } from 'material-ui/styles';
 
-import Item from './Item';
 // import NewItemInput from '../containers/NewItemInput';
 
-const ItemList = (props) => {
+const List = (props) => {
     const {
       classes,
-      list,
       items,
       editItemId,
       selectItemToEdit,
       clearSelectedItemToEdit,
       handleEditSubmit,
       handleDelete,
+      listSubHeader,
+      Item,
+      NewInput,
+      url,
     } = props;
 
     return <div>
-      <MuiList subheader={<ListSubheader>{list.name}</ListSubheader>}>
+      <MuiList subheader={<ListSubheader>{listSubHeader}</ListSubheader>}>
         { items.map(item => (
           <Item
             key={item.id} item={item}
             editClickHandler={selectItemToEdit}
-            editId={editItemId}
+            editItemId={editItemId}
             deselectInput={clearSelectedItemToEdit}
             handleEditSubmit={handleEditSubmit}
             handleDelete={handleDelete}
+            url={url}
           />
         ))}
       </MuiList>
-      {/* <NewItemInput /> */}
+      { NewInput && <NewInput /> }
     </div>
 };
 
-export default ItemList;
+export default List;

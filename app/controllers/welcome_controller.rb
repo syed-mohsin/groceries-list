@@ -2,9 +2,9 @@ class WelcomeController < ApplicationController
   def index
     lists = List.all
     @props = {
-      lists: {
-        lists: lists.as_json(include: :items),
-        editListId: nil,
+      items: {
+        items: lists.as_json(include: :items),
+        editItemId: nil,
         message: ''
       }
     }

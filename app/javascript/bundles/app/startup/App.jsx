@@ -9,7 +9,7 @@ import configureStore from '../store/store';
 
 import NavBar from '../components/NavBar';
 import ListsContainer from '../containers/ListsContainer';
-import ItemListContainer from '../containers/ItemListContainer';
+import ItemsContainer from '../containers/ItemsContainer';
 
 const styles = theme => ({
   root: {
@@ -25,7 +25,7 @@ const App = (props) => (
         <div className={classNames({ [props.classes.root]: true, 'm-2': true })}>
           <Switch>
             <Route exact path="/" component={ListsContainer} />
-            <Route exact path="/lists/:id" component={ItemListContainer} />
+            <Route exact path="/lists/:id" component={ItemsContainer} />
           </Switch>
         </div>
       </div>

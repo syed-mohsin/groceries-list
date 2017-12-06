@@ -13,7 +13,6 @@ import {
 } from '../constants/itemListConstants';
 
 const state = {
-  item: {},
   items: [],
   editItemId: null,
   message: '',

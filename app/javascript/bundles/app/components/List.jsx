@@ -13,22 +13,26 @@ import { withStyles } from 'material-ui/styles';
 class List extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { name: props.list.name };
+    this.state = { name: props.item.name };
   }
 
   handleEditSubmit = (e) => {
     if (e.key === 'Enter') {
-      const id = this.props.list.id;
-      const name = this.state.name;
+      const url = this.props.url,
+            id = this.props.item.id,
+            name = this.state.name,
+            body = { list: { name }};
 
-      this.props.handleEditSubmit(id, name)
+      this.props.handleEditSubmit(url, id, body)
       .then(() => this.props.deselectInput())
     }
   }
 
   handleDelete = () => {
-    const id = this.props.list.id;
-    this.props.handleDelete(id);
+    const url = this.props.url,
+          id = this.props.item.id;
+
+    this.props.handleDelete(url, id);
   }
 
   handleNameChange = (e) => {
@@ -55,10 +59,10 @@ class List extends React.Component {
   }
 
   render() {
-    const { list, editId, editClickHandler, deselectInput } = this.props;
+    const { item, editItemId, editClickHandler, deselectInput } = this.props;
 
     return <div>
-      { editId === list.id ?
+      { editItemId === item.id ?
         <ListItem>
           <TextField
             margin="normal"
@@ -75,8 +79,8 @@ class List extends React.Component {
         :
 
         <ListItem>
-          <ListItemText primary={list.name} secondary={`${list.items.length} items`}/>
-          <IconButton color="accent" aria-label="edit" onClick={(e) => editClickHandler(list.id)}><ModeEditIcon /></IconButton>
+          <ListItemText primary={item.name} secondary={`${item.items.length} items`}/>
+          <IconButton color="accent" aria-label="edit" onClick={(e) => editClickHandler(item.id)}><ModeEditIcon /></IconButton>
           <IconButton aria-label="Delete" onClick={this.handleDelete}><DeleteIcon /></IconButton>
         </ListItem>
       }

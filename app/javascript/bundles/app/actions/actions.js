@@ -23,15 +23,15 @@ export const clearSelectedItemToEdit = () => ({
   type: CLEAR_ITEM_EDIT,
 });
 
-export const handleNewSubmit = (data) => (dispatch) => {
+export const handleNewSubmit = (url, body) => (dispatch) => {
   dispatch({ type: NEW_ITEM_ASYNC_REQUEST });
 
-  return fetch('/api/v1/items/', {
+  return fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ item: data })
+    body: JSON.stringify(body)
   })
   .then(res => {
     if (!res.ok) throw new Error(res.statusText);
@@ -45,15 +45,15 @@ export const handleNewSubmit = (data) => (dispatch) => {
   });
 };
 
-export const handleEditSubmit = (id, data) => (dispatch) => {
+export const handleEditSubmit = (url, id, body) => (dispatch) => {
   dispatch({ type: EDIT_ITEM_ASYNC_REQUEST });
 
-  return fetch(`/api/v1/items/${id}`, {
+  return fetch(`${url}${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ item: data })
+    body: JSON.stringify(body)
   })
   .then(res => {
     if (!res.ok) throw new Error(res.statusText);
@@ -67,10 +67,10 @@ export const handleEditSubmit = (id, data) => (dispatch) => {
   });
 };
 
-export const handleDelete = (id) => (dispatch) => {
+export const handleDelete = (url, id) => (dispatch) => {
   dispatch({ type: DELETE_ITEM_ASYNC_REQUEST });
 
-  return fetch(`/api/v1/items/${id}`, {
+  return fetch(`${url}${id}`, {
     method: 'DELETE',
   })
   .then(res => {
