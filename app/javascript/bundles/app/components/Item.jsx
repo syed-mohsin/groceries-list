@@ -46,7 +46,7 @@ class Item extends React.Component {
 
   handleKeyDown = (e) => {
     if (e.key === 'Escape') {
-      this.props.deselectInput();
+      this.props.clearSelectedItemToEdit();
     }
   }
 
@@ -64,9 +64,8 @@ class Item extends React.Component {
   }
 
   render() {
-    const { item, editItemId, editClickHandler, deselectInput,
+    const { item, editItemId, selectItemToEdit, clearSelectedItemToEdit,
             primaryLabel, secondaryLabel, inputValueKey } = this.props;
-    console.log('props', this.props);
 
     return <div>
       { editItemId === item.id ?
@@ -78,7 +77,7 @@ class Item extends React.Component {
             onKeyPress={this.handleEditSubmit}
             onKeyDown={this.handleKeyDown}
             inputRef={this.autoFocusInput}
-            onBlur={deselectInput}
+            onBlur={clearSelectedItemToEdit}
             onFocus={this.setInputCursorOffset}
           />
         </ListItem>
@@ -87,7 +86,7 @@ class Item extends React.Component {
 
         <ListItem button>
           <ListItemText primary={primaryLabel(item)} secondary={secondaryLabel(item)} onClick={this.clickHandler} />
-          <IconButton color="accent" aria-label="edit" onClick={(e) => editClickHandler(item.id)}><ModeEditIcon /></IconButton>
+          <IconButton color="accent" aria-label="edit" onClick={(e) => selectItemToEdit(item.id)}><ModeEditIcon /></IconButton>
           <IconButton aria-label="Delete" onClick={this.handleDelete}><DeleteIcon /></IconButton>
         </ListItem>
       }

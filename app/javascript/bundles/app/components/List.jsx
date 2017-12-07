@@ -7,7 +7,7 @@ import Item from './Item';
 class List extends React.Component {
   componentWillReceiveProps(newProps) {
     // we load new data here because componentWillUnmount of previous component gets called
-    // AFTER componentWIllMount. This kicks off componentDidMount ignoring the now cleared
+    // AFTER componentWillMount. This kicks off componentDidMount ignoring the now cleared
     // state, so that cleared state needs to be detected in componentWillReceiveProps
     if (JSON.stringify(this.props) !== JSON.stringify(newProps) && !newProps.items.length) {
       this.props.loadItems('/api/v1/lists/', this.props.match.params.id);
@@ -21,8 +21,6 @@ class List extends React.Component {
   render() {
     const {
       items,
-      selectItemToEdit,
-      clearSelectedItemToEdit,
       listSubHeader,
       NewInput,
       ...remainingProps,
@@ -34,8 +32,6 @@ class List extends React.Component {
           <Item
             key={item.id}
             item={item}
-            editClickHandler={selectItemToEdit}
-            deselectInput={clearSelectedItemToEdit}
             {...remainingProps}
           />
         ))}
