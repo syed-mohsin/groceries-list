@@ -8,8 +8,8 @@ import classNames from 'classnames';
 import configureStore from '../store/store';
 
 import NavBar from '../components/NavBar';
-import ListsContainer from '../containers/ListsContainer';
-import ItemsContainer from '../containers/ItemsContainer';
+import HomePage from '../components/pages/HomePage';
+import ListPage from '../components/pages/ListPage';
 
 const styles = theme => ({
   root: {
@@ -22,11 +22,13 @@ const App = (props) => (
     <BrowserRouter>
       <div className="main-app">
         <NavBar />
-        <div className={classNames({ [props.classes.root]: true, 'm-2': true })}>
-          <Switch>
-            <Route exact path="/" component={ListsContainer} />
-            <Route exact path="/lists/:id" component={ItemsContainer} />
-          </Switch>
+        <div className="row m-2">
+          <div className={classNames({ [props.classes.root]: true, 'offset-md-3 col-md-6': true })}>
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route exact path="/lists/:id" component={ListPage} />
+            </Switch>
+          </div>
         </div>
       </div>
     </BrowserRouter>

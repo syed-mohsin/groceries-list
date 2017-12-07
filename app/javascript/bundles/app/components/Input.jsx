@@ -22,9 +22,8 @@ class Input extends React.Component {
   render() {
     return <TextField
       label="New List"
-      className="m-2 w-75"
-      helperText="there was an error"
-      error
+      className="mb-2 w-100"
+      helperText="helper text"
       value={this.state.value}
       onChange={this.inputChangeHandler}
       onKeyPress={this.inputSubmitHandler}

@@ -22,7 +22,6 @@ class List extends React.Component {
     const {
       items,
       listSubHeader,
-      NewInput,
       ...remainingProps,
     } = this.props;
 
@@ -36,8 +35,6 @@ class List extends React.Component {
           />
         ))}
       </MuiList>
-
-      { NewInput && <NewInput /> }
     </div>
   }
 }
