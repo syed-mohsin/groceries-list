@@ -124,9 +124,7 @@ const styles = theme => ({
   container: {
     flexGrow: 1,
     position: 'relative',
-    maxHeight: 200,
     zIndex: 5,
-    overflow: 'auto',
   },
   suggestionsContainerOpen: {
     position: 'absolute',
@@ -142,6 +140,8 @@ const styles = theme => ({
     margin: 0,
     padding: 0,
     listStyleType: 'none',
+    maxHeight: 200,
+    overflow: 'auto',
   },
   textField: {
     width: '100%',
