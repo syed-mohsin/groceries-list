@@ -10,6 +10,7 @@ import configureStore from '../store/store';
 import NavBar from '../components/NavBar';
 import HomePage from '../components/pages/HomePage';
 import ListPage from '../components/pages/ListPage';
+import MainListPage from '../components/pages/MainListPage';
 
 const styles = theme => ({
   root: {
@@ -26,7 +27,8 @@ const App = (props) => (
           <div className={classNames({ [props.classes.root]: true, 'offset-md-3 col-md-6': true })}>
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route exact path="/lists/:id" component={ListPage} />
+              <Route path="/lists/:id" component={ListPage} />
+              <Route exact path="/main_list" component={MainListPage} />
             </Switch>
           </div>
         </div>

@@ -8,9 +8,10 @@ import * as itemsActions from '../actions/itemsActions';
 const mapStateToProps = (state) => ({
   ...state.list,
   url: '/api/v1/items/',
-  loadUrl: '/api/v1/lists/',
-  listSubHeader: state.list.listData.name,
+  loadUrl: '/api/v1/items/',
+  listSubHeader: 'Main List',
   inputValueKey: 'content',
+  query: { is_in_main_list: true },
   setInitialState: (item) => ({
     content: item.content,
     price: item.price,

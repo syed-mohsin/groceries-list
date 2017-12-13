@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root 'welcome#index'
   get '/lists/:id', to: 'welcome#show'
+  get '/main_list', to: 'welcome#show_main'
 
   # this API responds by default with JSON
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :lists, except: [:new, :edit]
-      resources :items, except: [:index, :new, :edit]
+      resources :items, except: [:new, :edit]
     end
   end
 

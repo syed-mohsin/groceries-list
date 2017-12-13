@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+
 import * as types from '../constants/listActionConstants';
 
 export const selectItemToEdit = editItemId => ({
@@ -13,10 +15,10 @@ export const clearItems = () => ({
   type: types.CLEAR_ITEMS,
 })
 
-export const loadItems = (url, id) => dispatch => {
+export const loadItems = (url, id, query) => dispatch => {
   dispatch({ type: types.LOAD_ITEMS_ASYNC_REQUEST });
 
-  return fetch(`${url}${id ? id : ''}`, {
+  return fetch(`${url}${id ? id : ''}${query ? `?${queryString.stringify(query)}` : ''}`, {
     method: 'GET',
   })
   .then(res => {

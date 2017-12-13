@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
   ...state.list,
   listSubHeader: 'Your Lists',
   url: '/api/v1/lists/',
+  loadUrl: '/api/v1/lists/',
   inputValueKey: 'name',
   setInitialState: list => ({ name: list.name }),
   buildBody: body => ({ list: body }),

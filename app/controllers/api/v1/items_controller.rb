@@ -1,6 +1,11 @@
 class Api::V1::ItemsController < Api::V1::BaseController
   before_action :set_item, only: [:update, :destroy]
 
+  def index
+    items = Item.where(query_params)
+    render json: items
+  end
+
   def create
     list = List.find(params[:id])
     item = list.items.build(item_params)
@@ -28,6 +33,10 @@ class Api::V1::ItemsController < Api::V1::BaseController
   private
   def item_params
     params.fetch(:item, {}).permit(:content, :price, :is_completed, :is_in_main_list)
+  end
+
+  def query_params
+    params.permit(:is_in_main_list)
   end
 
   def set_item
