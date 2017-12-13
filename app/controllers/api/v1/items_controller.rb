@@ -27,7 +27,7 @@ class Api::V1::ItemsController < Api::V1::BaseController
 
   private
   def item_params
-    params.fetch(:item, {}).permit(:content, :price)
+    params.fetch(:item, {}).permit(:content, :price, :is_completed)
   end
 
   def set_item

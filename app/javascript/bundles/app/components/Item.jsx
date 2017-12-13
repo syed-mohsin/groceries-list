@@ -41,7 +41,7 @@ class Item extends React.Component {
   }
 
   handleInputChange = (e) => {
-    this.setState(this.props.setInputState(e.target.value));
+    this.setState({ [this.props.inputValueKey]: e.target.value });
   }
 
   handleKeyDown = (e) => {
@@ -65,13 +65,14 @@ class Item extends React.Component {
 
   render() {
     const { item, editItemId, selectItemToEdit, clearSelectedItemToEdit,
-            primaryLabel, secondaryLabel, inputValueKey } = this.props;
+            primaryLabel, secondaryLabel, inputValueKey, itemStyle, } = this.props;
 
     return <div>
       { editItemId === item.id ?
         <ListItem>
           <TextField
             margin="normal"
+            className="w-100"
             value={this.state[inputValueKey]}
             onChange={this.handleInputChange}
             onKeyPress={this.handleEditSubmit}
@@ -84,7 +85,7 @@ class Item extends React.Component {
 
         :
 
-        <ListItem button>
+        <ListItem button style={itemStyle && itemStyle(item)}>
           <ListItemText primary={primaryLabel(item)} secondary={secondaryLabel(item)} onClick={this.clickHandler} />
           <IconButton color="accent" aria-label="edit" onClick={(e) => selectItemToEdit(item.id)}><ModeEditIcon /></IconButton>
           <IconButton aria-label="Delete" onClick={this.handleDelete}><DeleteIcon /></IconButton>

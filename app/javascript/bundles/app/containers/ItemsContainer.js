@@ -2,25 +2,22 @@
 
 import { connect } from 'react-redux';
 import List from '../components/List';
-import Item from '../components/Item';
 import * as actions from '../actions/actions';
+import * as itemsActions from '../actions/itemsActions';
 
-const mapStateToProps = (state) => {
-  console.log('state', state);
-  return {
-    ...state.list,
-    url: '/api/v1/items/',
-    listSubHeader: state.list.listData.name,
-    inputValueKey: 'content',
-    setInitialState: (item) => ({
-      content: item.content,
-      price: item.price,
-    }),
-    setInputState: content => ({ content }),
-    buildBody: body => ({ item: body }),
-    primaryLabel: item => item.content,
-    secondaryLabel: item => `$${parseFloat(item.price).toFixed(2)}`,
-  };
-}
+const mapStateToProps = (state) => ({
+  ...state.list,
+  url: '/api/v1/items/',
+  listSubHeader: state.list.listData.name,
+  inputValueKey: 'content',
+  setInitialState: (item) => ({
+    content: item.content,
+    price: item.price,
+  }),
+  buildBody: body => ({ item: body }),
+  primaryLabel: item => item.content,
+  secondaryLabel: item => `$${parseFloat(item.price).toFixed(2)}`,
+  itemStyle: item => item.is_completed ? { textDecoration: 'line-through' } : {},
+});
 
-export default connect(mapStateToProps, actions)(List);
+export default connect(mapStateToProps, { ...actions, ...itemsActions })(List);

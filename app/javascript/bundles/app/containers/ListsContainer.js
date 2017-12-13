@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import List from '../components/List';
 import * as actions from '../actions/actions';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   ...state.list,
   listSubHeader: 'Your Lists',
   url: '/api/v1/lists/',
@@ -13,8 +13,11 @@ const mapStateToProps = (state) => ({
   buildBody: body => ({ list: body }),
   primaryLabel: list => list.name,
   secondaryLabel: list => `${list.items ? list.items.length : 0} items`,
-  setInputState: name => ({ name }),
   handleClick: (item, history) => history.push(`/lists/${item.id}`),
 });
+
+const mapDispatchToProps = dispatch => ({
+  ...actions
+})
 
 export default connect(mapStateToProps, actions)(List);

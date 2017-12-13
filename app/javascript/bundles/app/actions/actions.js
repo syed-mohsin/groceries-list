@@ -1,8 +1,6 @@
-/* eslint-disable import/prefer-default-export */
-
 import * as types from '../constants/listActionConstants';
 
-export const selectItemToEdit = (editItemId) => ({
+export const selectItemToEdit = editItemId => ({
   type: types.START_ITEM_EDIT,
   editItemId,
 });
@@ -15,7 +13,7 @@ export const clearItems = () => ({
   type: types.CLEAR_ITEMS,
 })
 
-export const loadItems = (url, id) => (dispatch) => {
+export const loadItems = (url, id) => dispatch => {
   dispatch({ type: types.LOAD_ITEMS_ASYNC_REQUEST });
 
   return fetch(`${url}${id ? id : ''}`, {
@@ -42,7 +40,7 @@ export const loadItems = (url, id) => (dispatch) => {
   });
 }
 
-export const handleNewSubmit = (url, body) => (dispatch) => {
+export const handleNewSubmit = (url, body) => dispatch => {
   dispatch({ type: types.NEW_ITEM_ASYNC_REQUEST });
 
   return fetch(url, {
@@ -64,7 +62,7 @@ export const handleNewSubmit = (url, body) => (dispatch) => {
   });
 };
 
-export const handleEditSubmit = (url, id, body) => (dispatch) => {
+export const handleEditSubmit = (url, id, body) => dispatch => {
   dispatch({ type: types.EDIT_ITEM_ASYNC_REQUEST });
 
   return fetch(`${url}${id}`, {
@@ -86,7 +84,7 @@ export const handleEditSubmit = (url, id, body) => (dispatch) => {
   });
 };
 
-export const handleDelete = (url, id) => (dispatch) => {
+export const handleDelete = (url, id) => dispatch => {
   dispatch({ type: types.DELETE_ITEM_ASYNC_REQUEST });
 
   return fetch(`${url}${id}`, {
