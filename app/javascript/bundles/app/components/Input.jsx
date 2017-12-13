@@ -21,7 +21,7 @@ class Input extends React.Component {
 
   render() {
     return <TextField
-      label="New List"
+      label={this.props.label}
       className="mb-2 w-100"
       helperText="helper text"
       value={this.state.value}

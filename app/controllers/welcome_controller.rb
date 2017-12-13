@@ -3,7 +3,6 @@ class WelcomeController < ApplicationController
     lists = List.all
     @props = {
       list: {
-        listData: {},
         items: lists.as_json(include: :items),
       }
     }

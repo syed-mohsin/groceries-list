@@ -29,7 +29,7 @@ class Item extends React.Component {
             body = this.props.buildBody(this.state);
 
       this.props.handleEditSubmit(url, id, body)
-      .then(() => this.props.deselectInput())
+      .then(() => this.props.clearSelectedItemToEdit());
     }
   }
 
