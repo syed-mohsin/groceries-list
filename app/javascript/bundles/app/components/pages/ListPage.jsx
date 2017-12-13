@@ -1,12 +1,12 @@
 import React from 'react';
 
 import ItemsContainer from '../../containers/ItemsContainer';
-import Form from '../Form';
+import ItemFormContainer from '../../containers/ItemFormContainer';
 
 const ListPage = (props) => (
   <div>
     <ItemsContainer {...props} />
-    <Form />
+    <ItemFormContainer {...props} />
   </div>
 )
 

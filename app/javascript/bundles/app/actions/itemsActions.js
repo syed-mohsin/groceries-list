@@ -9,7 +9,7 @@ import {
 
 const editRequest = (item, dispatch, toggle_property, types) => {
   const body = { ...item };
-  body.is_in_main_list = !body.is_in_main_list;
+  body[toggle_property] = !body[toggle_property];
 
   dispatch({ type: types.request });
 
@@ -35,9 +35,9 @@ const editRequest = (item, dispatch, toggle_property, types) => {
 export const handleClick = item => dispatch => {
   const toggle_property = 'is_completed';
   const types = {
-    request: TOGGLE_ITEM_COMPLETED_ASYNC_REQUEST,
-    success: TOGGLE_ITEM_COMPLETED_ASYNC_SUCCESS,
-    failure: TOGGLE_ITEM_COMPLETED_ASYNC_FAILURE,
+    request: TOGGLE_ITEM_COMPLETE_ASYNC_REQUEST,
+    success: TOGGLE_ITEM_COMPLETE_ASYNC_SUCCESS,
+    failure: TOGGLE_ITEM_COMPLETE_ASYNC_FAILURE,
   };
 
   return editRequest(
