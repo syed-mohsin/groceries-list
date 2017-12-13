@@ -22,7 +22,8 @@ class WelcomeController < ApplicationController
   end
 
   def show_main
-    items = Item.where(is_in_main_list: true)
+    query = { is_in_main_list: true }
+    items = Item.where(query)
 
     @props = {
       list: {
