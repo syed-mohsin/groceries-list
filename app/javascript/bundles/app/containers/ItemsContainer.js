@@ -18,6 +18,7 @@ const mapStateToProps = (state) => ({
   primaryLabel: item => item.content,
   secondaryLabel: item => `$${parseFloat(item.price).toFixed(2)}`,
   itemStyle: item => item.is_completed ? { textDecoration: 'line-through' } : {},
+  showCheckbox: true,
 });
 
 export default connect(mapStateToProps, { ...actions, ...itemsActions })(List);

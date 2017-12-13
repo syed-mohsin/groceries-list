@@ -55,20 +55,23 @@ const itemsReducer = (state = initialState, action) => {
     }
 
     case types.EDIT_ITEM_ASYNC_REQUEST:
-    case types.TOGGLE_ITEM_COMPLETE_ASYNC_REQUEST: {
+    case types.TOGGLE_ITEM_COMPLETE_ASYNC_REQUEST:
+    case types.TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_REQUEST: {
       const message = 'Edit request sent';
       return { ...state, message };
     }
 
     case types.EDIT_ITEM_ASYNC_SUCCESS:
-    case types.TOGGLE_ITEM_COMPLETE_ASYNC_SUCCESS: {
+    case types.TOGGLE_ITEM_COMPLETE_ASYNC_SUCCESS:
+    case types.TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_SUCCESS: {
       const { editedItem } = action;
       const items = state.items.map(item => item.id === editedItem.id ? editedItem : item);
       return { ...state, items };
     }
 
     case types.EDIT_ITEM_ASYNC_FAILURE:
-    case types.TOGGLE_ITEM_COMPLETE_ASYNC_FAILURE: {
+    case types.TOGGLE_ITEM_COMPLETE_ASYNC_FAILURE:
+    case types.TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_FAILURE: {
       const message = 'There was an error trying to edit item';
       return { ...state, message };
     }

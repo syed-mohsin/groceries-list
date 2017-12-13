@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { ListItem, ListItemText } from 'material-ui/List';
+import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import ModeEditIcon from 'material-ui-icons/ModeEdit';
 import DeleteIcon from 'material-ui-icons/Delete';
@@ -22,7 +23,7 @@ class Item extends React.Component {
     this.props.handleClick(item, history);
   }
 
-  handleEditSubmit = (e) => {
+  handleEditSubmit = e => {
     if (e.key === 'Enter') {
       const url = this.props.url,
             id = this.props.item.id,
@@ -40,32 +41,38 @@ class Item extends React.Component {
     this.props.handleDelete(url, id);
   }
 
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     this.setState({ [this.props.inputValueKey]: e.target.value });
   }
 
-  handleKeyDown = (e) => {
+  handleKeyDown = e => {
     if (e.key === 'Escape') {
       this.props.clearSelectedItemToEdit();
     }
   }
 
-  autoFocusInput = (ref) => {
+  autoFocusInput = ref => {
     if (ref) {
       this.editItemInput = ref;
       ref.focus();
     }
   }
 
-  setInputCursorOffset = (e) => {
+  setInputCursorOffset = e => {
     if (this.editItemInput) {
       this.editItemInput.selectionStart = e.target.value.length;
     }
   }
 
+  handleCheck = e => {
+    const { item } = this.props;
+    this.props.handleCheck(item);
+  }
+
   render() {
     const { item, editItemId, selectItemToEdit, clearSelectedItemToEdit,
-            primaryLabel, secondaryLabel, inputValueKey, itemStyle, } = this.props;
+            primaryLabel, secondaryLabel, inputValueKey, itemStyle,
+            showCheckbox } = this.props;
 
     return <div>
       { editItemId === item.id ?
@@ -86,6 +93,16 @@ class Item extends React.Component {
         :
 
         <ListItem button style={itemStyle && itemStyle(item)}>
+          {
+            showCheckbox && <Checkbox
+                checked={item.is_in_main_list}
+                tabIndex={-1}
+                onChange={this.handleCheck}
+                disableRipple
+                color="accent"
+              />
+          }
+
           <ListItemText primary={primaryLabel(item)} secondary={secondaryLabel(item)} onClick={this.clickHandler} />
           <IconButton color="accent" aria-label="edit" onClick={(e) => selectItemToEdit(item.id)}><ModeEditIcon /></IconButton>
           <IconButton aria-label="Delete" onClick={this.handleDelete}><DeleteIcon /></IconButton>
