@@ -9,7 +9,7 @@ const HomePage = (props) => (
     <ListsContainer {...props} />
     <div className="pl-3 pr-3"><NewListInput label="New List" /></div>
 
-    <RecipesContainer  {...props} />
+    {/* <RecipesContainer  {...props} /> */}
 
   </div>
 );
