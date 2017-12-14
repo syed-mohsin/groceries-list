@@ -1,8 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { withStyles } from 'material-ui/styles';
 import MuiList, { ListSubheader } from 'material-ui/List';
 import Item from './Item';
+
+const styles = theme => ({
+  root: {
+    background: theme.palette.background.paper,
+  },
+});
 
 class List extends React.Component {
   componentDidMount() {
@@ -16,13 +23,16 @@ class List extends React.Component {
 
   render() {
     const {
+      classes,
       items,
       listSubHeader,
+      noItemsMessage,
+      message,
       ...remainingProps,
     } = this.props;
 
     return <div>
-      <MuiList subheader={<ListSubheader>{listSubHeader}</ListSubheader>}>
+      <MuiList subheader={<ListSubheader>{listSubHeader}</ListSubheader>} className={classes.root}>
         { items.map(item => (
           <Item
             key={item.id}
@@ -30,9 +40,11 @@ class List extends React.Component {
             {...remainingProps}
           />
         ))}
+
+        { !items.length && message === 'success' && <h4 className="pl-3">{'nothing to show!'}</h4>}
       </MuiList>
     </div>
   }
 }
 
-export default List;
+export default withStyles(styles)(List);

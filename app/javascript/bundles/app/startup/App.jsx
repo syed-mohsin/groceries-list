@@ -24,7 +24,7 @@ const App = (props) => (
       <div className="main-app">
         <NavBar />
         <div className="row m-2">
-          <div className={classNames({ [props.classes.root]: true, 'offset-md-3 col-md-6': true })}>
+          <div className={classNames({ [props.classes.root]: false, 'offset-md-3 col-md-6': true })}>
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route path="/lists/:id" component={ListPage} />

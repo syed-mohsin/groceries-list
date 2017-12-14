@@ -27,8 +27,9 @@ const listReducer = types => (state = initialState, action) => {
     }
 
     case types.LOAD_ITEMS_ASYNC_SUCCESS: {
+      const message = 'success';
       const { items, listData } = action;
-      return { ...state, items, listData };
+      return { ...state, items, listData, message };
     }
 
     case types.LOAD_ITEMS_ASYNC_FAILURE: {
@@ -42,9 +43,10 @@ const listReducer = types => (state = initialState, action) => {
     }
 
     case types.NEW_ITEM_ASYNC_SUCCESS: {
+      const message = 'success';
       const { newItem } = action;
       const items = [...state.items, newItem];
-      return { ...state, items };
+      return { ...state, items, message };
     }
 
     case types.NEW_ITEM_ASYNC_FAILURE: {
@@ -62,9 +64,10 @@ const listReducer = types => (state = initialState, action) => {
     case types.EDIT_ITEM_ASYNC_SUCCESS:
     case types.TOGGLE_ITEM_COMPLETE_ASYNC_SUCCESS:
     case types.TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_SUCCESS: {
+      const message = 'success';
       const { editedItem } = action;
       const items = state.items.map(item => item.id === editedItem.id ? editedItem : item);
-      return { ...state, items };
+      return { ...state, items, message };
     }
 
     case types.EDIT_ITEM_ASYNC_FAILURE:
@@ -80,9 +83,10 @@ const listReducer = types => (state = initialState, action) => {
     }
 
     case types.DELETE_ITEM_ASYNC_SUCCESS: {
+      const message = 'success';
       const { deletedItem } = action;
       const items = state.items.filter(item => item.id !== deletedItem.id);
-      return { ...state, items };
+      return { ...state, items, message };
     }
 
     case types.DELETED_ITEM_ASYNC_FAILURE: {
