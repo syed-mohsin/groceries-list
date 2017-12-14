@@ -43,7 +43,7 @@ const ItemForm = ({ handleSubmit, match }) => (
 const reduxedItemForm = reduxForm({
   form: 'ItemForm',
 })(ItemForm);
-console.log('new item', actions);
+
 const onSubmit = (body, dispatch, ownProps) => {
   dispatch(actions.handleNewSubmit('/api/v1/items', { id: ownProps.match.params.id, ...body }))
   .then(() => dispatch(reset('ItemForm')));

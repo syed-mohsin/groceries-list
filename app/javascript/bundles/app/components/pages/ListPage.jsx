@@ -12,7 +12,7 @@ const styles = theme => ({
   },
 });
 
-const ListPage = (props) => (
+const ListPage = props => (
   <div className={props.classes.root}>
     <ItemsContainer {...props} />
     <ItemFormContainer {...props} />

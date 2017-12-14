@@ -10,6 +10,7 @@ import configureStore from '../store/store';
 import NavBar from '../components/NavBar';
 import HomePage from '../components/pages/HomePage';
 import ListPage from '../components/pages/ListPage';
+import RecipePage from '../components/pages/RecipePage';
 import MainListPage from '../components/pages/MainListPage';
 
 const styles = theme => ({
@@ -28,6 +29,7 @@ const App = (props) => (
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route path="/lists/:id" component={ListPage} />
+              <Route path="/recipes/:id" component={RecipePage} />
               <Route exact path="/main_list" component={MainListPage} />
             </Switch>
           </div>

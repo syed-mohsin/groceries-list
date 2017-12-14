@@ -26,53 +26,36 @@ function Transition(props) {
 }
 
 class FullScreenDialog extends React.Component {
-  state = {
-    open: false,
-  };
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
   handleRequestClose = () => {
-    this.setState({ open: false });
+    this.props.handleClose();
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, open } = this.props;
+
     return (
-      <div>
-        <Button onClick={this.handleClickOpen}>Open full-screen dialog</Button>
-        <Dialog
-          fullScreen
-          open={this.state.open}
-          onRequestClose={this.handleRequestClose}
-          transition={Transition}
-        >
-          <AppBar className={classes.appBar}>
-            <Toolbar>
-              <IconButton color="contrast" onClick={this.handleRequestClose} aria-label="Close">
-                <CloseIcon />
-              </IconButton>
-              <Typography type="title" color="inherit" className={classes.flex}>
-                Sound
-              </Typography>
-              <Button color="contrast" onClick={this.handleRequestClose}>
-                save
-              </Button>
-            </Toolbar>
-          </AppBar>
-          <List>
-            <ListItem button>
-              <ListItemText primary="Phone ringtone" secondary="Titania" />
-            </ListItem>
-            <Divider />
-            <ListItem button>
-              <ListItemText primary="Default notification ringtone" secondary="Tethys" />
-            </ListItem>
-          </List>
-        </Dialog>
-      </div>
+      <Dialog
+        fullScreen
+        open={open}
+        onRequestClose={this.handleRequestClose}
+        transition={Transition}
+      >
+        <AppBar className={classes.appBar}>
+          <Toolbar>
+            <IconButton color="contrast" onClick={this.handleRequestClose} aria-label="Close">
+              <CloseIcon />
+            </IconButton>
+            <Typography type="title" color="inherit" className={classes.flex}>
+              Sound
+            </Typography>
+            <Button color="contrast" onClick={this.handleRequestClose}>
+              save
+            </Button>
+          </Toolbar>
+        </AppBar>
+
+        {this.props.children}
+      </Dialog>
     );
   }
 }

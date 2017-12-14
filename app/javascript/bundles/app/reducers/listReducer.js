@@ -17,7 +17,6 @@ const listReducer = types => (state = initialState, action) => {
     }
 
     case types.CLEAR_ITEMS: {
-      console.log('clearing items in reducer');
       return initialState;
     }
 

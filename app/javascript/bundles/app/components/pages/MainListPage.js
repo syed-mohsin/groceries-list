@@ -2,7 +2,7 @@ import React from 'react';
 
 import MainListContainer from '../../containers/MainListContainer';
 
-const MainListPage = (props) => (
+const MainListPage = props => (
   <div>
     <MainListContainer {...props} />
   </div>

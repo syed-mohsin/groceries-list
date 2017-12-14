@@ -41,7 +41,7 @@ class List extends React.Component {
           />
         ))}
 
-        { !items.length && message === 'success' && <h4 className="pl-3">{'nothing to show!'}</h4>}
+        { !items.length && message === 'success' && <h5 className="pl-3">{'nothing to see here!'}</h5>}
       </MuiList>
     </div>
   }

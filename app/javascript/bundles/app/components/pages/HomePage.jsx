@@ -14,7 +14,7 @@ const styles = theme => ({
   },
 });
 
-const HomePage = (props) => (
+const HomePage = props => (
   <div>
     <ListsContainer {...props} />
     <div className={classNames({[props.classes.root]: true, 'pl-3 pr-3 pb-2 mb-3': true})}>
