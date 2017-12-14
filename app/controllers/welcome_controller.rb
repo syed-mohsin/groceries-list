@@ -38,4 +38,12 @@ class WelcomeController < ApplicationController
       }
     }
   end
+
+  def show_recipe
+    recipe = Recipe.find(params[:id])
+
+    @props = {
+      recipe: recipe.as_json(include: [:steps, :ingredients]),
+    }
+  end
 end

@@ -9,7 +9,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
-import CloseIcon from 'material-ui-icons/Close';
+import ArrowBackIcon from 'material-ui-icons/ArrowBack';
 import Slide from 'material-ui/transitions/Slide';
 
 const styles = {
@@ -43,7 +43,7 @@ class FullScreenDialog extends React.Component {
         <AppBar className={classes.appBar}>
           <Toolbar>
             <IconButton color="contrast" onClick={this.handleRequestClose} aria-label="Close">
-              <CloseIcon />
+              <ArrowBackIcon />
             </IconButton>
             <Typography type="title" color="inherit" className={classes.flex}>
               Sound
