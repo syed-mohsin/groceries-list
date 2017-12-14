@@ -6,7 +6,7 @@ import Item from './Item';
 
 class List extends React.Component {
   componentDidMount() {
-    const { loadUrl, match, query} = this.props;
+    const { loadUrl, match, query } = this.props;
     this.props.loadItems(loadUrl, match.params.id, query);
   }
 

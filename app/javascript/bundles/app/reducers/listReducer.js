@@ -1,5 +1,3 @@
-import * as types from '../constants/listActionConstants';
-
 const initialState = {
   listData: {},
   items: [],
@@ -7,7 +5,7 @@ const initialState = {
   message: '',
 }
 
-const itemsReducer = (state = initialState, action) => {
+const listReducer = types => (state = initialState, action) => {
   switch (action.type) {
     case types.START_ITEM_EDIT: {
       const { editItemId } = action;
@@ -97,4 +95,4 @@ const itemsReducer = (state = initialState, action) => {
   }
 };
 
-export default itemsReducer;
+export default listReducer;

@@ -1,20 +1,19 @@
-import * as types from '../constants/listActionConstants';
 import * as utils from '../utils/utils.js';
 
-export const selectItemToEdit = editItemId => ({
+const selectItemToEdit = types => editItemId => ({
   type: types.START_ITEM_EDIT,
   editItemId,
 });
 
-export const clearSelectedItemToEdit = () => ({
+const clearSelectedItemToEdit = types => () => ({
   type: types.CLEAR_ITEM_EDIT,
 });
 
-export const clearItems = () => ({
+const clearItems = types => () => ({
   type: types.CLEAR_ITEMS,
 })
 
-export const loadItems = (url, id, query) => dispatch => {
+const loadItems = types => (url, id, query) => dispatch => {
   dispatch({ type: types.LOAD_ITEMS_ASYNC_REQUEST });
 
   return fetch(`${url}${id ? id : ''}${utils.buildQuery(query)}`, {
@@ -41,7 +40,7 @@ export const loadItems = (url, id, query) => dispatch => {
   });
 }
 
-export const handleNewSubmit = (url, body) => dispatch => {
+const handleNewSubmit = types => (url, body) => dispatch => {
   dispatch({ type: types.NEW_ITEM_ASYNC_REQUEST });
 
   return fetch(url, {
@@ -63,7 +62,7 @@ export const handleNewSubmit = (url, body) => dispatch => {
   });
 };
 
-export const handleEditSubmit = (url, id, body) => dispatch => {
+const handleEditSubmit = types => (url, id, body) => dispatch => {
   dispatch({ type: types.EDIT_ITEM_ASYNC_REQUEST });
 
   return fetch(`${url}${id}`, {
@@ -85,7 +84,7 @@ export const handleEditSubmit = (url, id, body) => dispatch => {
   });
 };
 
-export const handleDelete = (url, id) => dispatch => {
+const handleDelete = types => (url, id) => dispatch => {
   dispatch({ type: types.DELETE_ITEM_ASYNC_REQUEST });
 
   return fetch(`${url}${id}`, {
@@ -102,3 +101,15 @@ export const handleDelete = (url, id) => dispatch => {
     dispatch({ type: types.DELETED_ITEM_ASYNC_FAILURE });
   });
 }
+
+const generateActions = types => ({
+  selectItemToEdit: selectItemToEdit(types),
+  clearSelectedItemToEdit: clearSelectedItemToEdit(types),
+  clearItems: clearItems(types),
+  loadItems: loadItems(types),
+  handleNewSubmit: handleNewSubmit(types),
+  handleEditSubmit: handleEditSubmit(types),
+  handleDelete: handleDelete(types),
+});
+
+export default generateActions;

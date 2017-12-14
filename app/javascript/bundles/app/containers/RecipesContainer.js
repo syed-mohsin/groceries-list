@@ -3,24 +3,24 @@ import List from '../components/List';
 import generateActions from '../actions/actions';
 import generateTypes from '../constants/listActionConstants';
 
-const actions = generateActions(generateTypes('groceries'));
+const actions = generateActions(generateTypes('recipes'));
 
 const mapStateToProps = state => ({
-  ...state.list,
-  listSubHeader: 'Your Lists',
-  url: '/api/v1/lists/',
-  loadUrl: '/api/v1/lists/',
+  ...state.recipes,
+  listSubHeader: 'Your Recipes',
+  url: '/api/v1/recipes/',
+  loadUrl: '/api/v1/recipes/',
   inputValueKey: 'name',
   setInitialState: list => ({ name: list.name }),
-  buildBody: body => ({ list: body }),
+  buildBody: body => ({ recipe: body }),
   primaryLabel: list => list.name,
-  secondaryLabel: list => `${list.items ? list.items.length : 0} items`,
-  handleClick: (item, history) => history.push(`/lists/${item.id}`),
-  namespace: 'groceries',
+  secondaryLabel: list => `${list.prep_time / 60} min cooking time`,
+  handleClick: (item, history) => history.push(`/recipes/${item.id}`),
+  namespace: 'recipes',
 });
 
 const mapDispatchToProps = dispatch => ({
-  ...actions
-})
+  ...actions,
+});
 
 export default connect(mapStateToProps, actions)(List);

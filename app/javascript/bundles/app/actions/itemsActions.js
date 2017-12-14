@@ -1,17 +1,8 @@
-import {
-  TOGGLE_ITEM_COMPLETE_ASYNC_REQUEST,
-  TOGGLE_ITEM_COMPLETE_ASYNC_SUCCESS,
-  TOGGLE_ITEM_COMPLETE_ASYNC_FAILURE,
-  TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_REQUEST,
-  TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_SUCCESS,
-  TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_FAILURE,
-} from '../constants/listActionConstants';
-
-const editRequest = (item, dispatch, toggle_property, types) => {
+const editRequest = (item, dispatch, toggle_property, typesGroup) => {
   const body = { ...item };
   body[toggle_property] = !body[toggle_property];
 
-  dispatch({ type: types.request });
+  dispatch({ type: typesGroup.request });
 
   return fetch(`/api/v1/items/${item.id}`, {
     method: 'PUT',
@@ -25,41 +16,48 @@ const editRequest = (item, dispatch, toggle_property, types) => {
     return res.json();
   })
   .then(editedItem => {
-    dispatch({ type: types.success, editedItem })
+    dispatch({ type: typesGroup.success, editedItem })
   })
   .catch(() => {
-    dispatch({ type: types.failure });
+    dispatch({ type: typesGroup.failure });
   });
 };
 
-export const handleClick = item => dispatch => {
+const handleClick = types => item => dispatch => {
   const toggle_property = 'is_completed';
-  const types = {
-    request: TOGGLE_ITEM_COMPLETE_ASYNC_REQUEST,
-    success: TOGGLE_ITEM_COMPLETE_ASYNC_SUCCESS,
-    failure: TOGGLE_ITEM_COMPLETE_ASYNC_FAILURE,
+  const typesGroup = {
+    request: types.TOGGLE_ITEM_COMPLETE_ASYNC_REQUEST,
+    success: types.TOGGLE_ITEM_COMPLETE_ASYNC_SUCCESS,
+    failure: types.TOGGLE_ITEM_COMPLETE_ASYNC_FAILURE,
   };
 
   return editRequest(
     item,
     dispatch,
     toggle_property,
-    types
+    typesGroup,
   );
 };
 
-export const handleCheck = item => dispatch => {
+const handleCheck = types => item => dispatch => {
   const toggle_property = 'is_in_main_list';
-  const types = {
-    request: TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_REQUEST,
-    success: TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_SUCCESS,
-    failure: TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_FAILURE,
+  const typesGroup = {
+    request: types.TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_REQUEST,
+    success: types.TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_SUCCESS,
+    failure: types.TOGGLE_ITEM_IN_MAIN_LIST_ASYNC_FAILURE,
   };
 
   return editRequest(
     item,
     dispatch,
     toggle_property,
-    types
+    typesGroup,
   );
 };
+
+const generateActions = types => ({
+  handleClick: handleClick(types),
+  handleCheck: handleCheck(types),
+});
+
+export default generateActions;

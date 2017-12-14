@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import Input from '../components/Input';
-import * as actions from '../actions/actions';
+
+import generateActions from '../actions/actions';
+import generateTypes from '../constants/listActionConstants';
+
+const actions = generateActions(generateTypes('groceries'));
 
 const mapDispatchToProps = dispatch => ({
   handleSubmit: (name) => {

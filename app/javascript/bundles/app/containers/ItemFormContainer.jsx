@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { handleNewSubmit } from '../actions/actions';
 
 import { Field, reduxForm, reset } from 'redux-form'
 import Typography from 'material-ui/Typography';
@@ -9,6 +8,11 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 
 import PriceInput from '../components/PriceInput';
+
+import generateActions from '../actions/actions';
+import generateTypes from '../constants/listActionConstants';
+
+const actions = generateActions(generateTypes('groceries'));
 
 const renderTextField = props => {
   return <TextField label={props.label}
@@ -39,9 +43,9 @@ const ItemForm = ({ handleSubmit, match }) => (
 const reduxedItemForm = reduxForm({
   form: 'ItemForm',
 })(ItemForm);
-
+console.log('new item', actions);
 const onSubmit = (body, dispatch, ownProps) => {
-  dispatch(handleNewSubmit('/api/v1/items', { id: ownProps.match.params.id, ...body }))
+  dispatch(actions.handleNewSubmit('/api/v1/items', { id: ownProps.match.params.id, ...body }))
   .then(() => dispatch(reset('ItemForm')));
 }
 

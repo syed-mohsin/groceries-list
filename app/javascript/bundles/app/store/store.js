@@ -1,10 +1,14 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { reducer as form } from 'redux-form';
 
-import { reducer as form } from 'redux-form'
-import list from '../reducers/listReducer';
+import listReducerGenerator from '../reducers/listReducer';
+import generateTypes from '../constants/listActionConstants';
 
-const reducers = combineReducers({ list, form });
+const list = listReducerGenerator(generateTypes('groceries'));
+const recipes = listReducerGenerator(generateTypes('recipes'));
+
+const reducers = combineReducers({ form, list, recipes });
 
 const configureStore = (railsProps) => {
   // remove classes prop passed into App from withStyles in (App.jsx)

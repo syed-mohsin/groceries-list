@@ -1,9 +1,11 @@
-// Simple example of a React "smart" component
-
 import { connect } from 'react-redux';
 import List from '../components/List';
-import * as actions from '../actions/actions';
-import * as itemsActions from '../actions/itemsActions';
+import generateActions from '../actions/actions';
+import generateTypes from '../constants/listActionConstants';
+import generateItemsActions from '../actions/itemsActions';
+
+const actions = generateActions(generateTypes('groceries'));
+const itemsActions = generateItemsActions(generateTypes('groceries'));
 
 const mapStateToProps = (state) => ({
   ...state.list,

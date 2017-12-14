@@ -1,10 +1,16 @@
 class WelcomeController < ApplicationController
   def index
     lists = List.all
+    recipes = Recipe.all
+
     @props = {
       list: {
         listData: {},
         items: lists.as_json(include: :items),
+      },
+      recipes: {
+        listData: {},
+        items: recipes.as_json(include: [:steps, :ingredients]),
       }
     }
   end
@@ -17,7 +23,7 @@ class WelcomeController < ApplicationController
       list: {
         listData: list,
         items: items,
-      }
+      },
     }
   end
 
