@@ -16,6 +16,7 @@ import Slide from 'material-ui/transitions/Slide';
 const styles = {
   appBar: {
     position: 'relative',
+    backgroundColor: '#FF9800',
   },
   flex: {
     flex: 1,
@@ -23,7 +24,7 @@ const styles = {
 };
 
 function Transition(props) {
-  return <Slide direction="right" {...props} />;
+  return <Slide direction="up" {...props} />;
 }
 
 class FullScreenDialog extends React.Component {
@@ -55,9 +56,7 @@ class FullScreenDialog extends React.Component {
           </Toolbar>
         </AppBar>
 
-        <div className="offset-md-3 col-md-6">
-          {this.props.children}
-        </div>
+        {this.props.children}
       </Dialog>
     );
   }

@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
   setInitialState: list => ({ name: list.name }),
   buildBody: body => ({ recipe: body }),
   primaryLabel: list => list.name,
-  secondaryLabel: list => `${list.prep_time / 60} min cooking time`,
+  secondaryLabel: list => `${list.prep_time} min cooking time`,
   handleClick: (item, history) => history.push(`/recipes/${item.id}`),
   namespace: 'recipes',
 });
