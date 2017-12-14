@@ -23,7 +23,6 @@ class Input extends React.Component {
     return <TextField
       label={this.props.label}
       className="mb-2 w-100"
-      helperText="helper text"
       value={this.state.value}
       onChange={this.inputChangeHandler}
       onKeyPress={this.inputSubmitHandler}
