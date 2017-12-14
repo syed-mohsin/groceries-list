@@ -10,6 +10,7 @@ import Toolbar from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
 import ArrowBackIcon from 'material-ui-icons/ArrowBack';
+import ModeEditIcon from 'material-ui-icons/ModeEdit';
 import Slide from 'material-ui/transitions/Slide';
 
 const styles = {
@@ -31,7 +32,7 @@ class FullScreenDialog extends React.Component {
   };
 
   render() {
-    const { classes, open } = this.props;
+    const { classes, open, title } = this.props;
 
     return (
       <Dialog
@@ -46,15 +47,17 @@ class FullScreenDialog extends React.Component {
               <ArrowBackIcon />
             </IconButton>
             <Typography type="title" color="inherit" className={classes.flex}>
-              Sound
+              {title}
             </Typography>
             <Button color="contrast" onClick={this.handleRequestClose}>
-              save
+              <ModeEditIcon />
             </Button>
           </Toolbar>
         </AppBar>
 
-        {this.props.children}
+        <div className="offset-md-3 col-md-6">
+          {this.props.children}
+        </div>
       </Dialog>
     );
   }
