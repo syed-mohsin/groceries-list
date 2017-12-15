@@ -29,6 +29,23 @@ const recipeReducer = (state = initialState, action) => {
       return { ...state, message };
     }
 
+    case types.UPDATE_RECIPE_ASYNC_REQUEST: {
+      const message = 'saving recipe..';
+      return { ...state, message };
+    }
+
+    case types.UPDATE_RECIPE_ASYNC_SUCCESS: {
+      const message = 'success';
+      const { recipe } = action;
+
+      return { ...recipe, message };
+    }
+
+    case types.UPDATE_RECIPE_ASYNC_FAILURE: {
+      const message = 'failed to save recipe';
+      return { ...state, message };
+    }
+
     case types.ADD_RECIPE_STEP_ASYNC_REQUEST: {
       const message = 'loading recipe..';
       return { ...state, message };

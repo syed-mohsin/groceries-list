@@ -7,24 +7,30 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import AlarmIcon from 'material-ui-icons/Alarm';
+import DeleteIcon from 'material-ui-icons/Delete';
+import IconButton from 'material-ui/IconButton';
+import TextField from 'material-ui/TextField';
 
 const styles = {
-  card: {
-  },
   media: {
     top:'-57',
     height: 225,
   },
 };
 
-class Recipe extends React.Component {
+class EditRecipe extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { ...props };
+  }
+
   componentDidMount() {
     const { url, match } = this.props;
     this.props.loadRecipe(url, match.params.id);
   }
 
   render() {
-    const { name, notes, prep_time, steps, ingredients, classes } = this.props;
+    const { name, notes, prep_time, steps, ingredients, classes } = this.state;
 
     return (
       <Card className={classes.card}>
@@ -34,16 +40,14 @@ class Recipe extends React.Component {
           title="Vegan Nacho Dip Stock Photo"
         />
         <div className="p-3">
-          <Typography type="subheader" component="secondary" className="d-flex justify-content-center align-items-center">
-            <AlarmIcon /> <div className="ml-2">{prep_time || 0} mins</div>
-          </Typography>
+          <div className="d-flex justify-content-center align-items-center">
+            <AlarmIcon /><div className="ml-2"><TextField value={`${prep_time || 0} mins`} /></div>
+          </div>
 
           <Typography type="headline" component="h2">
             Notes
           </Typography>
-          <Typography component="p">
-            {notes || 'Add some notes!'}
-          </Typography>
+          <TextField multiline fullWidth value={notes || 'Add some notes!'} />
 
           <Typography type="headline" component="h2" className="mt-2">
             Steps
@@ -51,7 +55,8 @@ class Recipe extends React.Component {
           <List>
             {steps.map((step, i) => (
               <ListItem key={step.id} className="pt-0 pb-1">
-                <ListItemText primary={`${i}. ${step.instruction}`} />
+                <TextField fullWidth value={`${i}. ${step.instruction}`} />
+                <IconButton aria-label="Delete"><DeleteIcon /></IconButton>
               </ListItem>
             ))}
           </List>
@@ -59,22 +64,19 @@ class Recipe extends React.Component {
           <Typography type="headline" component="h2" className="mt-2">
             Ingredients
           </Typography>
-          <List >
+          <List>
             {ingredients.map(ingredient => (
               <ListItem key={ingredient.id} className="pt-0 pb-1">
-                <ListItemText primary={ingredient.content} secondary={ingredient.quantity} />
+                <TextField fullWidth value={ingredient.content} />
+                <TextField value={ingredient.quantity} />
+                <IconButton aria-label="Delete"><DeleteIcon /></IconButton>
               </ListItem>
             ))}
           </List>
-
-          {/* Steps:
-          { steps.map((step, i) => `Step ${i}: ${step.instruction}`) }
-          Ingredients:
-          { ingredients.map((ingredient, i) => `${ingredient.content}, ${ingredient.quantity}`) } */}
         </div>
       </Card>
     )
   }
 }
 
-export default withStyles(styles)(Recipe);
+export default withStyles(styles)(EditRecipe);

@@ -9,6 +9,7 @@ import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
 import ArrowBackIcon from 'material-ui-icons/ArrowBack';
 import ModeEditIcon from 'material-ui-icons/ModeEdit';
+import DoneIcon from 'material-ui-icons/Done';
 import Slide from 'material-ui/transitions/Slide';
 
 const styles = {
@@ -21,9 +22,21 @@ const styles = {
   },
 };
 
-function Transition(props) {
-  return <Slide direction="up" {...props} />;
-}
+const EditButton = ({ onClick }) => (
+  <Button color="contrast" onClick={onClick}>
+    <ModeEditIcon />
+  </Button>
+);
+
+const SaveButton = ({ onClick }) => (
+  <Button color="contrast" onClick={onClick}>
+    <DoneIcon />
+  </Button>
+);
+
+const Transition = props => (
+  <Slide direction="up" {...props} />
+);
 
 class FullScreenDialog extends React.Component {
   handleRequestClose = () => {
@@ -31,7 +44,8 @@ class FullScreenDialog extends React.Component {
   };
 
   render() {
-    const { classes, open, title } = this.props;
+    const { classes, open, title, editMode,
+            toggleEditMode, saveData } = this.props;
 
     return (
       <Dialog
@@ -40,7 +54,7 @@ class FullScreenDialog extends React.Component {
         onRequestClose={this.handleRequestClose}
         transition={Transition}
       >
-        <AppBar className={classes.appBar}>
+        <AppBar className={classes.appBar} position="absolute">
           <Toolbar>
             <IconButton color="contrast" onClick={this.handleRequestClose} aria-label="Close">
               <ArrowBackIcon />
@@ -48,9 +62,12 @@ class FullScreenDialog extends React.Component {
             <Typography type="title" color="inherit" className={classes.flex}>
               {title}
             </Typography>
-            <Button color="contrast" onClick={this.handleRequestClose}>
-              <ModeEditIcon />
-            </Button>
+
+            { editMode ?
+                <SaveButton onClick={saveData} />
+                :
+                <EditButton onClick={toggleEditMode} />
+            }
           </Toolbar>
         </AppBar>
 
